@@ -1,6 +1,8 @@
 package twoPointers;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class twoPointers {
 
@@ -8,10 +10,10 @@ public class twoPointers {
     public static void main(String[] args) {
 
         char[]  arr = {'h', 'e', 'l', 'l', 'o'};
-        char[] result = reverseCharArray2(arr);
-        int [] nums = {2, 7, 11, 15};
+        //char[] result = reverseCharArray2(arr);
+        int [] nums = {2, 7, 2, 3};
         int target = 9;
-        twoSumSorted(nums,target);
+        System.out.println( checkDuplicates(nums));
     }
 
     public static char[] reverseCharArray2(char[] nums) {
@@ -45,6 +47,19 @@ public class twoPointers {
             }
         }
         return new int[]{-1, -1};
+    }
+
+    public static boolean checkDuplicates(int[] nums) {
+      Set<Integer> arraySet = new HashSet<>();
+
+      for(int n: nums){
+          if(arraySet.contains(n)) {
+              return true;
+          }
+          arraySet.add(n);
+      }
+
+      return false;
     }
 
 
