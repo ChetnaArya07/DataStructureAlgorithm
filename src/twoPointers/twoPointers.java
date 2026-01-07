@@ -52,11 +52,11 @@ public class twoPointers {
     public static boolean checkDuplicates(int[] nums) {
       Set<Integer> arraySet = new HashSet<>();
 
-      for(int n: nums){
-          if(arraySet.contains(n)) {
+      for(int num: nums){
+          if(arraySet.contains(num)) {
               return true;
           }
-          arraySet.add(n);
+          arraySet.add(num);
       }
 
       return false;
