@@ -1,6 +1,6 @@
 package slidingWindowExamples;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class SlidingWindow {
 
@@ -72,28 +72,44 @@ public class SlidingWindow {
         return minSum;
     }
 
+    public static boolean containsNearbyDuplicate(int[] nums, int k) {
+        int left = 0;
+        Set<Integer> set = new HashSet<>();
+        for(int right = 0; right < nums.length ; right++ ){
+            if(set.contains(nums[right])){
+               if(Math.abs(right-left)<= k)
+                   return true;
+                set.remove(nums[left]);
+                left++;
+            }
+            set.add(nums[right]);
+        }
+        return false;
+    }
+
+    /*Concise*/
+    public boolean containsNearbyDuplicateUsingMap(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                if (i - map.get(nums[i]) <= k) {
+                    return true;
+                }
+            }
+            map.put(nums[i], i);
+        }
+        return false;
+    }
+
+
 
     public static void main(String[] args) {
-        /*
-        int[]  arr = {2,1,5,1,3,2,6};
+
+        int[]  arr = {1,2,3,1};
         int k = 3;
-        int maxSum = maximumSumOfArraySizeK(arr,k);
 
-        System.out.println("maxSum for subArray length "+k+" is : "+maxSum);
-
-        int[] arr1 = {1, 3, 2, 6, -1, 4, 1, 8, 2};
-         k = 5;
-
-        double[] average = averageOfSubArraySizeK(arr1,k);
-
-        System.out.println("average for subArray length "+k+" is : "+ Arrays.toString(average));
-        */
-
-        int[]  arr = {2,1,5,1,3,2,6};
-        int k = 2;
-        int maxSum = minimumSumOfArraySizeK(arr,k);
-
-        System.out.println("minimum sum for subArray length "+k+" is : "+maxSum);
+        System.out.println(containsNearbyDuplicate(arr,k));
 
     }
 }
