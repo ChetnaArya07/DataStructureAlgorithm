@@ -88,6 +88,10 @@ public class SlidingWindow {
     }
 
     /*Concise*/
+
+
+
+
     public boolean containsNearbyDuplicateUsingMap(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
 
@@ -102,14 +106,29 @@ public class SlidingWindow {
         return false;
     }
 
+    public static int minSubArrayLen(int target, int[] nums) {
+        int left =0, minLen = Integer.MAX_VALUE, sum=0;
+        for(int right =0; right< nums.length ; right++){
+            sum += nums[right];
+
+            while(sum >= target){
+                minLen = Math.min(minLen, right - left + 1);
+                sum -= nums[left];
+                left++;
+            }
+        }
+
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
+    }
+
 
 
     public static void main(String[] args) {
 
-        int[]  arr = {1,2,3,1};
+        int[]  arr = {1,1,1};
         int k = 3;
 
-        System.out.println(containsNearbyDuplicate(arr,k));
+        System.out.println(minSubArrayLen(k,arr));
 
     }
 }
